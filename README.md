@@ -44,35 +44,6 @@ This repository contains significant updates and enhancements to my dotfiles for
   - **Waybar Selector**: Choose Waybar styles.
   - **Wallpaper Selector**: Browse and set wallpapers with image previews.
 
----
-
-## 💻 Tools & Recommendations for Implementation
-
-### 🛠️ Development Stack
-- **Language**: Use **TypeScript** for maintainable and type-safe scripts.
-- **Runtime**: Use **Bun.js** for its high performance and modern APIs.
-- **Styling**: Leverage **TailwindCSS** for rapid UI prototyping and customization.
-
-### 📦 Suggested Libraries & Tools
-1. **Color Extraction**:
-   - Use [`color-thief`](https://www.npmjs.com/package/color-thief) or [`vibrant.js`](https://github.com/Vibrant-Colors/node-vibrant) to extract dominant colors from wallpapers dynamically.
-   
-2. **Wallpaper Selector**:
-   - Enhance the user experience using `rofi` with custom `.rasi` themes to display image previews and integrate seamlessly with the Hyprland workflow.
-   
-3. **Waybar Styles**:
-   - Pre-build configurations with modular JSON files that can be dynamically loaded based on the selector input.
-   
-4. **Theme Management**:
-   - Use a centralized configuration file (e.g., `themes.json`) to manage color palettes for themes.
-
-5. **Selectors**:
-   - Implement menu-based selectors using:
-     - `rofi` for lightweight, responsive menus.
-     - Or build a **custom GUI** with **Electron** or **SvelteKit** for a richer experience.
-
-6. **Dynamic Updates**:
-   - Use **D-Bus** or **Hyprland socket APIs** to reload Waybar or theme configurations dynamically without restarting the session.
 
 ---
 
