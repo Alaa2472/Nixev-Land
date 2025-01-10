@@ -48,3 +48,11 @@ This repository is dedicated to upgrading and enhancing my dotfiles for **Hyprla
    curl -fsSL https://bun.sh/install | bash
    bun -v # to verify version and bun installation
    bun i -g child_process fs path os @types/bun
+
+
+# **Bindings for scripts:**
+> Super + shift + W = wallpaper selector 
+
+> Super + A = app launcher 
+
+> Super + Shift + B = change waybar style
