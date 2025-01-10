@@ -42,3 +42,9 @@ This repository is dedicated to upgrading and enhancing my dotfiles for **Hyprla
    ```bash
    git clone https://github.com/Alaa2472/Nixev-Land.git
    cd Nixev-Land
+
+2. Install dependency:
+   ```bash
+   curl -fsSL https://bun.sh/install | bash
+   bun -v # to verify version and bun installation
+   bun i -g child_process fs path os @types/bun
