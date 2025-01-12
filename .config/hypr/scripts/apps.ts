@@ -1,8 +1,8 @@
 #!/usr/bin/env bun
 
-import { readdir, readFile, writeFile } from 'node:fs/promises';
-import { join } from 'node:path';
-import { spawn } from 'node:child_process';
+import { readdir, readFile, writeFile } from 'fs/promises';
+import { join } from 'path';
+import { spawn } from 'child_process';
 import { existsSync } from 'node:fs';
 
 const APPS_DIR = '/usr/share/applications'; // Directory for .desktop files

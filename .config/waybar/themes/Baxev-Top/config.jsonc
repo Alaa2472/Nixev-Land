@@ -1,0 +1,169 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 20,
+  "margin-top": 5,
+  "margin-right": 8,
+  "margin-left": 8,
+  "spacing": 2,
+  "padding-inline": 5,
+  "exclusive": true,
+  "gtk-layer-shell": true,
+  "passthrough": false,
+  "fixed-center": true,
+  "modules-left": ["custom/rofi", "hyprland/workspaces", "hyprland/window"],
+  "modules-center": ["mpris"],
+  "modules-right": [
+    "cpu",
+    "memory",
+    "pulseaudio",
+    "clock",
+    "clock#simpleclock",
+    "custom/wifi",
+    "tray",
+    "custom/notification",
+    "custom/power"
+  ],
+  "custom/rofi": {
+    "format": "<span color='#fbf1c7' >󰮯</span>",
+    "on-click": "~/.config/hypr/scripts/apps.ts",
+    "on-click-right": "wlogout",
+    "escape": true,
+    "tooltip": false
+  },
+  "custom/spotify": {
+    "format": "  {}",
+    "return-type": "json",
+    "on-click": "playerctl -p spotify play-pause",
+    "on-click-right": "spotifatius toggle-liked",
+    "on-click-middle": "playerctl -p spotify next",
+    "exec": "spotifatius monitor"
+  },
+  "mpris": {
+    "dynamic-order": ["artist", "title"],
+    "format": "{player_icon} {dynamic}",
+    "format-paused": "{status_icon} <i>{dynamic}</i>",
+    "status-icons": {
+      "paused": ""
+    },
+    "player-icons": {
+      "default": ""
+    }
+  },
+  "hyprland/workspaces": {
+    "disable-scroll": true,
+    "on-click": "activate",
+    "active-only": false,
+    "all-outputs": true,
+    "warp-on-scroll": false,
+    "format": "{icon}",
+    "format-icons": {
+      "1": "<span color='#f5c2e7' >󰊠</span>", // Rosewater
+      "2": "<span color='#f28f8f' >󰊠</span>", // Flamingo
+      "3": "<span color='#f2cdcd' >󰊠</span>", // Pink
+      "4": "<span color='#cba6f7' >󰊠</span>", // Mauve
+      "5": "<span color='#f38ba8' >󰊠</span>", // Red
+      "6": "<span color='#eba0ac' >󰊠</span>", // Maroon
+      "7": "<span color='#f8e2a4' >󰊠</span>", // Peach
+      "default": "<span color='#a6e3a1'>󰊠</span>" // Green
+    },
+    "persistent-workspaces": {
+      "*": 5
+    }
+  },
+  "hyprland/window": {
+    "format": "{class}",
+    "max-length": 20,
+    "rewrite": {
+      "": "<span foreground= '#458588'></span> hyprland",
+      "~": " terminal",
+      "com.mitchellh.ghostty": ">> ghostty",
+      "zen-beta": ">> zen"
+    }
+  },
+  "tray": {
+    "show-passive-items": true,
+    "spacing": 10
+  },
+  "clock#simpleclock": {
+    "tooltip": false,
+    "format": "<span><b> {:%H:%M}</b></span>"
+  },
+  "clock": {
+    "format": " {:L%a %d %b}",
+    "calendar": {
+      "format": {
+        "days": "<span weight='normal'>{}</span>",
+        "months": "<span color='#cdd6f4'><b>{}</b></span>",
+        "today": "<span color='#f38ba8' weight='700'><u>{}</u></span>",
+        "weekdays": "<span color='#f9e2af'><b>{}</b></span>",
+        "weeks": "<span color='#a6e3a1'><b>W{}</b></span>"
+      },
+      "mode": "month",
+      "mode-mon-col": 1,
+      "on-scroll": 1
+    },
+    "tooltip-format": "<span color='#cdd6f4' font='Lexend 16'><tt><small>{calendar}</small></tt></span>"
+  },
+  "cpu": {
+    "format": " {usage}%",
+    "tooltip": true,
+    "interval": 1,
+    "on-click": "kitty -e btop"
+  },
+  "memory": {
+    "format": " {used:0.1f}Gi",
+    "on-click": "kitty -e btop",
+    "tooltip": true,
+    "interval": 1
+  },
+  "pulseaudio": {
+    "format": "{icon}{volume}%",
+    "format-muted": " Muted",
+    "format-icons": {
+      "headphone": " ",
+      "default": [" ", " ", "  "]
+    },
+    "on-click": "pavucontrol",
+    "on-click-right": "pulsemixer --toggle-mute"
+  },
+  "custom/sep": {
+    "format": "|",
+    "tooltip": true
+  },
+  "custom/power": {
+    "tooltip": false,
+    "on-click": "~/.config/waybar/scripts/power-menu.sh",
+    "format": "⏻"
+  },
+
+  "custom/notification": {
+    "escape": true,
+    "exec": "swaync-client -swb",
+    "exec-if": "which swaync-client",
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "󰅸",
+      "none": "󰂜",
+      "dnd-notification": "󰅸",
+      "dnd-none": "󱏨",
+      "inhibited-notification": "󰅸",
+      "inhibited-none": "󰂜",
+      "dnd-inhibited-notification": "󰅸",
+      "dnd-inhibited-none": "󱏨"
+    },
+    "on-click": "sleep 0.1 && swaync-client -t -sw",
+    "return-type": "json",
+    "tooltip": false
+  },
+  "custom/wifi": {
+    "exec": "~/.config/waybar/scripts/wifi-status.sh",
+    "return-type": "json",
+    "format": "{}",
+    "tooltip": true,
+    "on-click": "~/.config/waybar/scripts/wifi-menu.sh",
+    "interval": 1,
+    "min-length": 1,
+    "max-length": 12
+  }
+}

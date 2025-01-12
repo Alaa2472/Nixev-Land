@@ -1,0 +1,147 @@
+* {
+  min-height: 0;
+  min-width: 0;
+  font-family: Lexend, "JetBrainsMono NFP";
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 15px;
+}
+
+window#waybar {
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  background-color: rgba(24, 24, 37, 0.8);
+  border: solid 2px rgba(25, 25, 37, 0.8);
+}
+#workspaces {
+  margin: 0px 10px 0px 5px;
+}
+#custom-rofi {
+  padding: 0.3rem 0.6rem;
+  margin: 0.3rem 0rem 0.3rem 0.5rem;
+
+  /* background-color: #181825; */
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+}
+#workspaces button {
+  padding: 0.3rem 0.6rem;
+  margin: 0.3rem 0.25rem;
+
+  /* background-color: #181825; */
+  background-color: #1e1e2e;
+  color: #cdd6f4;
+}
+
+#workspaces button:hover {
+  background: #313244; /* Mocha surface0 */
+  border-radius: 15px;
+}
+
+#workspaces button.visible {
+  border-radius: 15px;
+  background: #1e1e2e; /* Mocha base */
+}
+
+#workspaces button.visible:hover {
+  border-radius: 15px;
+  background: #1e1e2e; /* Mocha base */
+}
+
+#workspaces button.active {
+  border-radius: 15px;
+  background: #29293c; /* Mocha base */
+}
+
+#workspaces button.active:hover {
+  border-radius: 15px;
+  background: #1e1e2e; /* Mocha base */
+}
+
+#workspaces button.urgent {
+  border-radius: 15px;
+  background: #f38ba8; /* Mocha red */
+}
+
+#clock,
+#pulseaudio,
+#custom-logo,
+#custom-power,
+#custom-spotify,
+#custom-notification,
+#custom-wifi,
+#cpu,
+#tray,
+#memory,
+#window,
+#mpris {
+  padding: 0.3rem 0.6rem;
+  margin: 0.3rem 0.25rem;
+
+  /* background-color: #181825; */
+  background-color: #1e1e2e;
+}
+
+#mpris.playing {
+  color: #a6e3a1;
+}
+
+#mpris.paused {
+  color: #9399b2;
+}
+
+#custom-sep {
+  padding: 0px;
+  color: #585b70;
+}
+
+window#waybar.empty #window {
+  background-color: transparent;
+}
+
+#cpu {
+  color: #94e2d5;
+}
+
+#memory {
+  color: #cba6f7;
+}
+
+#clock {
+  color: #74c7ec;
+}
+
+#clock.simpleclock {
+  color: #89b4fa;
+}
+
+#window {
+  color: #cdd6f4;
+}
+
+#pulseaudio {
+  color: #b4befe;
+}
+
+#pulseaudio.muted {
+  color: #a6adc8;
+}
+
+#custom-logo {
+  color: #89b4fa;
+}
+
+#custom-power {
+  color: #f38ba8;
+  margin: 0.3rem 0.7rem;
+}
+#custom-wifi {
+  color: #b4befe;
+  margin: 0.3rem 0.7rem;
+
+}
+
+tooltip {
+  background-color: #181825;
+  border: 2px solid #89b4fa;
+}
