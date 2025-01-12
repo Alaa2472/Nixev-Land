@@ -1,8 +1,17 @@
-# ✨ **Hyprland Dotfiles Enhancements Roadmap** 🚀
+
+
+# ✨ **Nixev Hyprland Dotfiles** 🚀
+
+![Nixev Land](Pictures/Nixev%20Land.png)
+![Nixev Land Full](Pictures/Nixev%20Land%20full.png)
 
 This repository is dedicated to upgrading and enhancing my dotfiles for **Hyprland** to improve both visual appeal and usability. The main focus is on advanced selectors and dynamic theming that provides a more cohesive and streamlined desktop experience.
 
 ---
+# 🚨**WAIT! Its still under developement Don't use it**‼️
+
+---
+
 
 ## 📝 **Planned Features & TODOs**
 
@@ -42,14 +51,11 @@ This repository is dedicated to upgrading and enhancing my dotfiles for **Hyprla
    ```bash
    git clone https://github.com/Alaa2472/Nixev-Land.git
    cd Nixev-Land
-
 2. Install dependency:
    ```bash
    curl -fsSL https://bun.sh/install | bash
    bun -v # to verify version and bun installation
    bun i -g child_process fs path os @types/bun
-
-
 # **Bindings for scripts:**
 > Super + shift + W = wallpaper selector 
 
