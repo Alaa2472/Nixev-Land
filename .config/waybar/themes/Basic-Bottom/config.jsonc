@@ -42,7 +42,6 @@
     "tooltip": false
   },
 
-  // Modules configuration
   "hyprland/workspaces": {
     "disable-scroll": true,
     "active-only": false,
@@ -130,12 +129,12 @@
   },
 
   "custom/backlight": {
-    "exec": "~/.config/waybar/scripts/brightness-control.sh",
+    "exec": "~/.config/waybar/scripts/brightness-control.ts",
     "return-type": "json",
     "format": "{}",
     "tooltip": true,
-    "on-scroll-up": "~/.config/waybar/scripts/brightness-control.sh -o i",
-    "on-scroll-down": "~/.config/waybar/scripts/brightness-control.sh -o d",
+    "on-scroll-up": "~/.config/waybar/scripts/brightness-control.ts -o i",
+    "on-scroll-down": "~/.config/waybar/scripts/brightness-control.ts -o d",
     "interval": 1,
     "min-length": 6,
     "max-length": 6
@@ -157,11 +156,11 @@
   },
 
   "custom/wifi": {
-    "exec": "~/.config/waybar/scripts/wifi-status.sh",
+    "exec": "~/.config/waybar/scripts/wifi-status.ts",
     "return-type": "json",
     "format": "{}",
     "tooltip": true,
-    "on-click": "~/.config/waybar/scripts/wifi-menu.sh",
+    "on-click": "~/.config/waybar/scripts/wifi-menu.ts",
     "interval": 1,
     "min-length": 1,
     "max-length": 12
@@ -179,7 +178,7 @@
     "tooltip-format-enumerate-connected": "{device_alias}",
     "tooltip-format-enumerate-connected-battery": "{device_alias}: {device_battery_percentage}%",
 
-    "on-click": "~/.config/waybar/scripts/bluetooth-menu.sh",
+    "on-click": "~/.config/waybar/scripts/bluetooth-menu.ts",
     "interval": 1,
     "min-length": 1,
     "max-length": 10

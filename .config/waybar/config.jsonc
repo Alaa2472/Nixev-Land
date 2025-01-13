@@ -1,8 +1,8 @@
 {
-  "layer": "top",
-  "position": "top",
+  "layer": "bottom",
+  "position": "bottom",
   "height": 20,
-  "margin-top": 5,
+  "margin-bottom": 5,
   "margin-right": 8,
   "margin-left": 8,
   "spacing": 2,
@@ -133,7 +133,7 @@
   },
   "custom/power": {
     "tooltip": false,
-    "on-click": "~/.config/waybar/scripts/power-menu.sh",
+    "on-click": "~/.config/waybar/scripts/power-menu.ts",
     "format": "⏻"
   },
 
@@ -157,11 +157,11 @@
     "tooltip": false
   },
   "custom/wifi": {
-    "exec": "~/.config/waybar/scripts/wifi-status.sh",
+    "exec": "~/.config/waybar/scripts/wifi-status.ts",
     "return-type": "json",
     "format": "{}",
     "tooltip": true,
-    "on-click": "~/.config/waybar/scripts/wifi-menu.sh",
+    "on-click": "~/.config/waybar/scripts/wifi-menu.ts",
     "interval": 1,
     "min-length": 1,
     "max-length": 12

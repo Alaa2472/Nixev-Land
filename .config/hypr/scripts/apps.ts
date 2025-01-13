@@ -5,21 +5,19 @@ import { join } from 'path';
 import { spawn } from 'child_process';
 import { existsSync } from 'node:fs';
 
-const APPS_DIR = '/usr/share/applications'; // Directory for .desktop files
-const ROFI_THEME = '/home/nix/.config/rofi/appSelector.rasi'; // Path to your Rofi theme
-const USAGE_FILE = '/home/nix/.config/app_usage.json'; // File to store app usage data
+const APPS_DIR = '/usr/share/applications'; 
+const ROFI_THEME = '/home/nix/.config/rofi/appSelector.rasi';
+const USAGE_FILE = '/home/nix/.config/app_usage.json'; 
 
-// Function to load usage data
 async function loadUsage(): Promise<Record<string, number>> {
   try {
     const data = await readFile(USAGE_FILE, 'utf-8');
     return JSON.parse(data);
   } catch (error) {
-    return {}; // Return an empty object if the file doesn't exist
+    return {}; 
   }
 }
 
-// Function to save usage data
 async function saveUsage(usage: Record<string, number>) {
   try {
     await writeFile(USAGE_FILE, JSON.stringify(usage, null, 2));
@@ -28,18 +26,16 @@ async function saveUsage(usage: Record<string, number>) {
   }
 }
 
-// Function to list applications in the system directory
 async function listApps() {
     try {
       const files = await readdir(APPS_DIR);
-      return files.filter(file => file.endsWith('.desktop')); // Assuming apps are in .desktop files
+      return files.filter(file => file.endsWith('.desktop')); 
     } catch (error) {
       console.error('Error listing applications:', error);
       return [];
     }
   }
 
-// Function to extract the icon from the .desktop file
 async function getAppIcon(desktopFile: string): Promise<string> {
     const filePath = join(APPS_DIR, desktopFile);
     try {
@@ -47,7 +43,6 @@ async function getAppIcon(desktopFile: string): Promise<string> {
       const match = data.match(/Icon=(.*)/);
       if (match && match[1]) {
         const iconName = match[1].trim();
-        // Check for icon paths in common directories
         const possiblePaths = [
           `/usr/share/icons/hicolor/48x48/apps/${iconName}.png`,
           `/usr/share/icons/hicolor/64x64/apps/${iconName}.png`,
@@ -55,36 +50,34 @@ async function getAppIcon(desktopFile: string): Promise<string> {
         ];
         for (const path of possiblePaths) {
           if (existsSync(path)) {
-            return path; // Return the full path if the icon exists
+            return path; 
           }
         }
-        return iconName; // Return the name if no path is found
+        return iconName; 
       }
-      return ''; // Return empty string if no icon is found
+      return ''; 
     } catch (error) {
       console.error('Error reading icon for', desktopFile, error);
       return '';
     }
   }
 
-// Function to show Rofi menu with apps
 async function showRofiMenu(items: string[]): Promise<string> {
   const usage = await loadUsage();
 
-  // Sort apps by usage count (most used first), then alphabetically
   const sortedItems = items.sort((a, b) => {
     const aUsage = usage[a] || 0;
     const bUsage = usage[b] || 0;
     if (aUsage !== bUsage) {
-      return bUsage - aUsage; // Place more used apps at the top
+      return bUsage - aUsage; 
     }
-    return a.localeCompare(b); // Alphabetical order for apps with the same usage
+    return a.localeCompare(b); 
   });
 
   const formattedItems = await Promise.all(sortedItems.map(async (item) => {
-    const appName = item.replace('.desktop', ''); // Remove extension for display
-    const icon = await getAppIcon(item); // Get the icon for the app
-    return `${appName}\0icon\x1f${icon || 'application'}\0${item}`; // Include full item for selection
+    const appName = item.replace('.desktop', ''); 
+    const icon = await getAppIcon(item); 
+    return `${appName}\0icon\x1f${icon || 'application'}\0${item}`;
   }));
 
   const rofi = Bun.spawn(['rofi',
@@ -95,7 +88,7 @@ async function showRofiMenu(items: string[]): Promise<string> {
     '-theme', ROFI_THEME,
     '-kb-cancel', 'Escape',
     '-no-custom',
-    '-mesg', 'Use ↑↓ to scroll, Enter to select', // Adding helpful message
+    '-mesg', 'Use ↑↓ to scroll, Enter to select',
   ], {
     stdin: 'pipe',
   });
@@ -106,29 +99,25 @@ async function showRofiMenu(items: string[]): Promise<string> {
   const output = await new Response(rofi.stdout).text();
   const selected = output.trim();
   
-  // Find the corresponding app full name
   const match = formattedItems.find(item => item.startsWith(`${selected}\0`));
-  return match?.split('\0')[2] || ''; // Return full file name (with extension) if found
+  return match?.split('\0')[2] || ''; 
 }
 
-// Function to extract the executable command from the .desktop file
 async function getAppExec(desktopFile: string): Promise<string> {
   const filePath = join(APPS_DIR, desktopFile);
   try {
     const data = await readFile(filePath, 'utf-8');
     const match = data.match(/Exec=(.*)/);
     if (match && match[1]) {
-      // Remove placeholders like %U, %u, %F, %f, etc.
       return match[1].trim().replace(/%.*/g, '').trim();
     }
-    return ''; // Return empty string if no exec command is found
+    return ''; 
   } catch (error) {
     console.error('Error reading exec command for', desktopFile, error);
     return '';
   }
 }
 
-// Function to launch the selected application
 async function launchApp(selected: string) {
   const appPath = join(APPS_DIR, selected);
 
@@ -142,20 +131,18 @@ async function launchApp(selected: string) {
       throw new Error(`No executable command found for: ${selected}`);
     }
     const [command, ...args] = execCommand.split(' ');
-    await Bun.spawn([command, ...args]); // Using the extracted command and arguments to start the application
+    await Bun.spawn([command, ...args]); 
   } catch (error) {
     throw new Error(`Failed to launch application: ${selected}`);
   }
 }
 
-// Function to update usage count
 async function updateUsage(selectedApp: string) {
   const usage = await loadUsage();
-  usage[selectedApp] = (usage[selectedApp] || 0) + 1; // Increment usage count
+  usage[selectedApp] = (usage[selectedApp] || 0) + 1; 
   await saveUsage(usage);
 }
 
-// Main function to run the application selector
 async function main() {
   try {
     const apps = await listApps();
@@ -167,9 +154,9 @@ async function main() {
 
     const selected = await showRofiMenu(apps);
     if (selected) {
-      const appName = selected.replace('.desktop', ''); // Remove the extension for display
+      const appName = selected.replace('.desktop', '');
       await launchApp(selected);
-      await updateUsage(selected); // Update usage count
+      await updateUsage(selected);
       console.log('Application launched successfully:', appName);
     } else {
       console.log('No application selected.');
