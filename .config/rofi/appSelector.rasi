@@ -114,7 +114,7 @@ text-color: @foreground               ;
 listview {
 enabled: true                    ;
 columns: 5                       ;
-lines: 3                         ;
+lines: 2                         ;
 cycle: true                      ;
 dynamic: true                    ;
 scrollbar: false                 ;

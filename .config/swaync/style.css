@@ -5,8 +5,8 @@
 /* Notifications & Rows */
 .control-center .notification-row:focus,
 .control-center .notification-row:hover {
-  opacity: 1;
-  background: #313244;  /* Surface0 */
+  opacity: 0.1;
+  background: rgba(49, 50, 68, 0.7);  /* Surface0 */
 }
 
 .notification-row {
@@ -16,14 +16,14 @@
 }
 
 .notification {
-  background: #1e1e2e;  /* Base */
-  border: 2px solid #313244;  /* Surface0 */
+  background: rgba(30, 30, 46, 0.7);  /* Base */
+  border: 2px solid rgba(49, 50, 68, 0.7);  /* Surface0 */
   border-radius: 5px;
   margin: 3px -2px 3px 0;
 }
 
 .notification-content {
-  background: #1e1e2e;  /* Base */
+  background: rgba(30, 30, 46, 0.7);  /* Base */
 }
 
 .notification-default-action {
@@ -34,8 +34,8 @@
 
 /* Close Button */
 .close-button {
-  background: #f38ba8;  /* Pink */
-  color: #1e1e2e;  /* Base */
+  background: rgba(243, 139, 168, 0.7);  /* Pink */
+  color: rgba(30, 30, 46, 0.7);  /* Base */
   text-shadow: none;
   padding: 0;
   border-radius: 5px;
@@ -45,22 +45,22 @@
 
 .close-button:hover {
   box-shadow: none;
-  background: #f38ba8;  /* Pink */
+  background: rgba(243, 139, 168, 0.7);  /* Pink */
   transition: all 0.15s ease-in-out;
   border: none;
 }
 
 /* Notification Actions */
 .notification-action {
-  border: 2px solid #313244;  /* Surface0 */
+  border: 2px solid rgba(49, 50, 68, 0.7);  /* Surface0 */
   border-top: none;
   border-radius: 5px;
 }
 
 .notification-default-action:hover,
 .notification-action:hover {
-  color: #89b4fa;  /* Blue */
-  background: #1e1e2e;  /* Base */
+  color: rgba(137, 180, 250, 0.7);  /* Blue */
+  background: rgba(30, 30, 46, 0.7);  /* Base */
 }
 
 .notification-default-action {
@@ -75,12 +75,12 @@
 
 .notification-action:first-child {
   border-bottom-left-radius: 10px;
-  background: #181825;  /* Mantle */
+  background: rgba(24, 24, 37, 0.7);  /* Mantle */
 }
 
 .notification-action:last-child {
   border-bottom-right-radius: 10px;
-  background: #181825;  /* Mantle */
+  background: rgba(24, 24, 37, 0.7);  /* Mantle */
 }
 
 /* Inline Reply */
@@ -89,29 +89,29 @@
 }
 
 .inline-reply-entry {
-  background: #313244;  /* Surface0 */
-  color: #cdd6f4;  /* Text */
-  caret-color: #cdd6f4;  /* Text */
-  border: 1px solid #45475a;  /* Surface1 */
+  background: rgba(49, 50, 68, 0.7);  /* Surface0 */
+  color: rgba(205, 214, 244, 0.7);  /* Text */
+  caret-color: rgba(205, 214, 244, 0.7);  /* Text */
+  border: 1px solid rgba(69, 71, 90, 0.7);  /* Surface1 */
   border-radius: 5px;
 }
 
 .inline-reply-button {
   margin-left: 4px;
-  background: #1e1e2e;  /* Base */
-  border: 1px solid #45475a;  /* Surface1 */
+  background: rgba(30, 30, 46, 0.7);  /* Base */
+  border: 1px solid rgba(69, 71, 90, 0.7);  /* Surface1 */
   border-radius: 5px;
-  color: #cdd6f4;  /* Text */
+  color: rgba(205, 214, 244, 0.7);  /* Text */
 }
 
 .inline-reply-button:disabled {
   background: initial;
-  color: #6c7086;  /* Subtext0 */
+  color: rgba(108, 112, 134, 0.7);  /* Subtext0 */
   border: 1px solid transparent;
 }
 
 .inline-reply-button:hover {
-  background: #313244;  /* Surface0 */
+  background: rgba(49, 50, 68, 0.7);  /* Surface0 */
 }
 
 /* Image */
@@ -125,7 +125,7 @@
   font-size: 16px;
   font-weight: 700;
   background: transparent;
-  color: #a6e3a1;  /* Green */
+  color: rgba(166, 227, 161, 0.7);  /* Green */
   text-shadow: none;
 }
 
@@ -133,7 +133,7 @@
   font-size: 16px;
   font-weight: 700;
   background: transparent;
-  color: #cdd6f4;  /* Text */
+  color: rgba(205, 214, 244, 0.7);  /* Text */
   text-shadow: none;
   margin-right: 18px;
 }
@@ -142,14 +142,14 @@
   font-size: 15px;
   font-weight: 400;
   background: transparent;
-  color: #cdd6f4;  /* Text */
+  color: rgba(205, 214, 244, 0.7);  /* Text */
   text-shadow: none;
 }
 
 /* Control Center */
 .control-center {
-  background: #1e1e2e;  /* Base */
-  border: 2px solid #313244;  /* Surface0 */
+  background: rgba(30, 30, 46, 0.7);  /* Base */
+  border: 2px solid rgba(49, 50, 68, 0.7);  /* Surface0 */
   border-radius: 5px;
 }
 
@@ -165,14 +165,10 @@
   background: transparent;
 }
 
-.blank-window {
-  background: rgba(0, 0, 0, 0.1);
-}
-
 /* Widgets */
 .widget-title {
-  color: #89b4fa;  /* Blue */
-  background: #313244;  /* Surface0 */
+  color: rgba(137, 180, 250, 0.7);  /* Blue */
+  background: rgba(49, 50, 68, 0.7);  /* Surface0 */
   padding: 5px 10px;
   margin: 10px 10px 5px 10px;
   font-size: 1.5rem;
@@ -181,44 +177,44 @@
 
 .widget-title>button {
   font-size: 1rem;
-  color: #cdd6f4;  /* Text */
+  color: rgba(205, 214, 244, 0.7);  /* Text */
   text-shadow: none;
-  background: #1e1e2e;  /* Base */
+  background: rgba(30, 30, 46, 0.7);  /* Base */
   box-shadow: none;
   border-radius: 5px;
 }
 
 .widget-title>button:hover {
-  background: #f38ba8;  /* Pink */
-  color: #1e1e2e;  /* Base */
+  background: rgba(243, 139, 168, 0.7);  /* Pink */
+  color: rgba(30, 30, 46, 0.7);  /* Base */
 }
 
 .widget-dnd {
-  background: #313244;  /* Surface0 */
+  background: rgba(49, 50, 68, 0.7);  /* Surface0 */
   padding: 5px 10px;
   margin: 5px 10px;
   border-radius: 5px;
   font-size: large;
-  color: #89b4fa;  /* Blue */
+  color: rgba(137, 180, 250, 0.7);  /* Blue */
 }
 
 .widget-dnd>switch {
   border-radius: 5px;
-  background: #89b4fa;  /* Blue */
+  background: rgba(137, 180, 250, 0.7);  /* Blue */
 }
 
 .widget-dnd>switch:checked {
-  background: #f38ba8;  /* Pink */
-  border: 1px solid #f38ba8;  /* Pink */
+  background: rgba(243, 139, 168, 0.7);  /* Pink */
+  border: 1px solid rgba(243, 139, 168, 0.7);  /* Pink */
 }
 
 .widget-dnd>switch slider {
-  background: #1e1e2e;  /* Base */
+  background: rgba(30, 30, 46, 0.7);  /* Base */
   border-radius: 5px;
 }
 
 .widget-dnd>switch:checked slider {
-  background: #1e1e2e;  /* Base */
+  background: rgba(30, 30, 46, 0.7);  /* Base */
   border-radius: 5px;
 }
 
@@ -228,13 +224,13 @@
 
 .widget-label>label {
   font-size: 1rem;
-  color: #cdd6f4;  /* Text */
+  color: rgba(205, 214, 244, 0.7);  /* Text */
 }
 
 /* MPRIS Widget */
 .widget-mpris {
-  color: #cdd6f4;  /* Text */
-  background: #313244;  /* Surface0 */
+  color: rgba(205, 214, 244, 0.7);  /* Text */
+  background: rgba(49, 50, 68, 0.7);  /* Surface0 */
   padding: 5px 10px;
   margin: 5px 10px 5px 10px;
   border-radius: 5px;
@@ -264,19 +260,19 @@
   padding: 5px;
   margin: 5px 10px 10px 10px;
   border-radius: 5px;
-  background: #313244;  /* Surface0 */
+  background: rgba(49, 50, 68, 0.7);  /* Surface0 */
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button {
   margin: 3px;
-  background: #1e1e2e;  /* Base */
+  background: rgba(30, 30, 46, 0.7);  /* Base */
   border-radius: 5px;
-  color: #cdd6f4;  /* Text */
+  color: rgba(205, 214, 244, 0.7);  /* Text */
 }
 
 .widget-buttons-grid>flowbox>flowboxchild>button:hover {
-  background: #89b4fa;  /* Blue */
-  color: #1e1e2e;  /* Base */
+  background: rgba(137, 180, 250, 0.7);  /* Blue */
+  color: rgba(30, 30, 46, 0.7);  /* Base */
 }
 
 /* Menu Bar */
@@ -292,19 +288,19 @@
 
 /* Volume & Backlight Widgets */
 .widget-volume {
-  background: #313244;  /* Surface0 */
+  background: rgba(49, 50, 68, 0.7);  /* Surface0 */
   padding: 5px;
   margin: 5px 10px;
   border-radius: 5px;
   font-size: 2rem;
-  color: #89b4fa;  /* Blue */
+  color: rgba(137, 180, 250, 0.7);  /* Blue */
 }
 
 .widget-backlight {
-  background: #313244;  /* Surface0 */
+  background: rgba(49, 50, 68, 0.7);  /* Surface0 */
   padding: 5px;
   margin: 5px 10px;
   border-radius: 5px;
   font-size: 2rem;
-  color: #89b4fa;  /* Blue */
+  color: rgba(137, 180, 250, 0.7);  /* Blue */
 }
