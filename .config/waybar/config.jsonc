@@ -12,7 +12,7 @@
   "passthrough": false,
   "fixed-center": true,
   "modules-left": ["custom/rofi", "hyprland/workspaces", "hyprland/window"],
-  "modules-center": ["mpris"],
+  "modules-center": ["mpris","custom/cava"],
   "modules-right": [
     "cpu",
     "memory",
@@ -50,6 +50,9 @@
       "default": ""
     }
   },
+  "custom/cava": {
+    "exec": "sleep 3 && cava -p /home/nix/.config/cava/cava.conf"
+},
   "hyprland/workspaces": {
     "disable-scroll": true,
     "on-click": "activate",

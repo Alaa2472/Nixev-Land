@@ -3,7 +3,7 @@
 import { readdir, readFile, writeFile } from 'fs/promises';
 import { join } from 'path';
 import { spawn } from 'child_process';
-import { existsSync } from 'node:fs';
+import { existsSync } from 'fs';
 
 const APPS_DIR = '/usr/share/applications'; 
 const ROFI_THEME = '/home/nix/.config/rofi/appSelector.rasi';

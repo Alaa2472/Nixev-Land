@@ -74,6 +74,7 @@ window#waybar {
 #tray,
 #memory,
 #window,
+#custom-cava,
 #mpris {
   padding: 0.3rem 0.6rem;
   margin: 0.3rem 0.25rem;
@@ -144,4 +145,13 @@ window#waybar.empty #window {
 tooltip {
   background-color: #181825;
   border: 2px solid #89b4fa;
+}
+
+#custom-cava {
+  color: #8FBC8F;
+  border-left: 0px;
+  border-right: 0px;
+  padding-bottom: 6px;
+  font-family: "bargraph";
+  font-size: 22px;
 }

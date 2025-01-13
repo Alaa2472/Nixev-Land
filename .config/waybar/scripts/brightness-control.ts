@@ -5,7 +5,7 @@ import { promisify } from "util";
 const execAsync = promisify(exec);
 
 async function printError() {
-  console.log(`Usage: ./brightnesscontrol.sh <action>
+  console.log(`Usage: ./brightnesscontrol.ts <action>
 Valid actions are:
     i -- <i>ncrease brightness [+2%]
     d -- <d>ecrease brightness [-2%]`);

@@ -1,9 +1,8 @@
 #!/usr/bin/env bun
 
-import { readdir, copyFile, writeFile, mkdir } from "node:fs/promises";
-import { join } from "node:path";
-import { spawn } from "node:child_process";
-import { existsSync } from "node:fs";
+import { readdir, copyFile, mkdir } from "node:fs/promises";
+import { join } from "path";
+import { existsSync } from "fs";
 
 const WALLPAPERS_DIR = "/home/nix/Pictures/Nixuccin";
 const HYPR_CONFIG_DIR = "/home/nix/.config/hypr";

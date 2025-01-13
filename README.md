@@ -55,7 +55,7 @@ This repository is dedicated to upgrading and enhancing my dotfiles for **Hyprla
    ```bash
    curl -fsSL https://bun.sh/install | bash
    bun -v # to verify version and bun installation
-   bun i -g child_process fs path os @types/bun
+   bun i -g child_process fs path os @types/bun util execa
 # **Bindings for scripts:**
 > Super + shift + W = wallpaper selector 
 

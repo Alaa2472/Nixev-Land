@@ -44,12 +44,12 @@
     "format": "{player_icon} {dynamic}",
     "format-paused": "{status_icon} <i>{dynamic}</i>",
     "status-icons": {
-      "paused": ""
+      "paused": ""
     },
     "player-icons": {
-      "default": ""
+      "default": ""
     }
-  },
+},
   "hyprland/workspaces": {
     "disable-scroll": true,
     "on-click": "activate",
