@@ -41,6 +41,7 @@ window#waybar {
 #window,
 #tray,
 #disk,
+#custom-updates,
 #cpu,
 #temperature,
 #temperature.critical,
@@ -68,6 +69,7 @@ window#waybar {
 #temperature.critical,
 #backlight,
 #custom-memory,
+#custom-updates,
 #pulseaudio,
 #pulseaudio.muted,
 #battery,
@@ -242,11 +244,10 @@ window#waybar {
 
 #mpris {
   color: #1e1e2e; /* Mocha base */
-  border: 2px solid #1e1e2e; /* Mocha base */
   border-radius: 21px;
-  background: #cdd6f4; /* Mocha text */
-  padding: 5px 5px;
-  margin: 1px 1px;
+  background: #666c83; /* Mocha text */
+  padding: 2px 5px;
+  margin: 5px 1px;
 }
 
 #custom-notification {

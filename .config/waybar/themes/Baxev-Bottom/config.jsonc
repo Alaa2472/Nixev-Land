@@ -11,7 +11,7 @@
   "gtk-layer-shell": true,
   "passthrough": false,
   "fixed-center": true,
-  "modules-left": ["custom/rofi", "hyprland/workspaces", "hyprland/window"],
+  "modules-left": ["custom/rofi", "hyprland/workspaces", "hyprland/window","custom/updates"],
   "modules-center": ["mpris"],
   "modules-right": [
     "cpu",
@@ -165,5 +165,12 @@
     "interval": 1,
     "min-length": 1,
     "max-length": 12
+  },
+  "custom/updates":{
+      "format": " {}",
+      "exec": "checkupdates | wc -l",
+      "exec-if": "[[ $(checkupdates | wc -l) != 0 ]]",
+      "interval": 1,
+      "on-click": "kitty -e sudo pacman -Syu && notify-send 'The system has been updated' "
   }
 }

@@ -11,7 +11,9 @@
     "custom/rofi",
     "hyprland/workspaces",
     "custom/paddc",
-    "hyprland/window"
+    "hyprland/window",
+    "custom/paddc",
+    "custom/updates"
   ],
 
   "modules-center": ["mpris"],
@@ -204,5 +206,12 @@
     "on-click-right": "swaync-client -d -sw",
     "on-click": "swaync-client -t -sw",
     "escape": true
+  },
+  "custom/updates":{
+      "format": " {}",
+      "exec": "checkupdates | wc -l",
+      "exec-if": "[[ $(checkupdates | wc -l) != 0 ]]",
+      "interval": 1,
+      "on-click": "kitty -e sudo pacman -Syu && notify-send 'The system has been updated' "
   }
 }

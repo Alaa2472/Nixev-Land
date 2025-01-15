@@ -11,8 +11,8 @@
   "gtk-layer-shell": true,
   "passthrough": false,
   "fixed-center": true,
-  "modules-left": ["custom/rofi", "hyprland/workspaces", "hyprland/window"],
-  "modules-center": ["mpris"],
+  "modules-left": ["custom/rofi", "hyprland/workspaces", "hyprland/window","custom/updates"],
+  "modules-center": ["mpris","custom/cava"],
   "modules-right": [
     "cpu",
     "memory",
@@ -49,6 +49,9 @@
     "player-icons": {
       "default": ""
     }
+  },
+  "custom/cava": {
+    "exec": "sleep 3 && cava -p /home/nix/.config/cava/cava.conf"
 },
   "hyprland/workspaces": {
     "disable-scroll": true,
@@ -165,5 +168,12 @@
     "interval": 1,
     "min-length": 1,
     "max-length": 12
+  },
+  "custom/updates":{
+      "format": " {}",
+      "exec": "checkupdates | wc -l",
+      "exec-if": "[[ $(checkupdates | wc -l) != 0 ]]",
+      "interval": 1,
+      "on-click": "kitty -e sudo pacman -Syu && notify-send 'The system has been updated' "
   }
 }

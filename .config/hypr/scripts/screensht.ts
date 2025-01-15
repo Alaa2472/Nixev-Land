@@ -1,76 +1,208 @@
 #!/usr/bin/env bun
-
-import { execa } from "execa";
-import { existsSync, mkdirSync } from "fs";
+import { $ } from "bun";
+import { mkdirSync } from "fs";
+import { homedir } from "os";
 import { join } from "path";
 
-const SAVE_DIR = "/home/nix/Pictures/Screenshots";
+const SAVE_DIR = join(homedir(), "Pictures", "Screenshots");
+const DATE_FORMAT =
+  new Date()
+    .toISOString()
+    .replace(/[-:]/g, "")
+    .replace("T", "_")
+    .replace(/\..+/, "") + "_screenshot.png";
+const SCREENSHOT_FILE = join(SAVE_DIR, DATE_FORMAT);
+
+interface HyprctlResponse {
+  int: number;
+}
+
+interface Monitor {
+  name: string;
+  focused: boolean;
+}
+
 mkdirSync(SAVE_DIR, { recursive: true });
 
-const getFileName = () => {
-  const date = new Date().toISOString().replace(/:/g, "-");
-  return join(SAVE_DIR, `screenshot-${date}.png`);
-};
-
-const takeScreenshot = async (mode: string) => {
-  const fileName = getFileName();
-
+async function copyToClipboard(file: string) {
   try {
-    // Take screenshot based on mode
-    switch (mode) {
-      case "-f": // Full screen
-        await execa("grim", [fileName]);
-        break;
-
-      case "-m": // All monitors
-        await execa("sh", [
-          "-c",
-          `grim -o "$(hyprctl monitors -j | jq -r '.[].name')" "${fileName}"`,
-        ]);
-        break;
-
-      case "-s": // Selected area
-        try {
-          const { stdout } = await execa("slurp", ["-d"]);
-          await execa("grim", ["-g", stdout.trim(), fileName]);
-        } catch (error) {
-          console.log("Selection cancelled");
-          process.exit(0);
-        }
-        break;
-      case "-s": // Selected area
-        try {
-          const { stdout } = await execa("slurp", ["-d"]);
-          await execa("grim", ["-g", stdout.trim(), fileName]);
-        } catch (error) {
-          console.log("Selection cancelled");
-          process.exit(0);
-        }
-        break;
-      default:
-        console.log("Usage: screenshot.ts [-f|-m|-s]");
-        process.exit(1);
-    }
-
-    // Copy saved file to clipboard first
-    if (existsSync(fileName)) {
-      await execa("wl-copy", ["-t", "image/png", fileName]);
-    }
-
-    // Open in editor for all modes
-    try {
-      await execa("swappy", ["-f", fileName]);
-    } catch (error) {
-      console.log("Editor closed");
-    }
-
-    // Send notification
-    await execa("notify-send", ["Screenshot", `Saved to ${fileName}`]);
+    await $`wl-copy -t image/png < ${file}`;
+    return true;
   } catch (error) {
-    console.error("Screenshot failed:", error);
+    console.error("Error copying to clipboard:", error);
+    return false;
+  }
+}
+
+async function sendNotification(file: string, message: string) {
+  try {
+    await $`notify-send -i ${file} "Screenshot" ${message}`;
+    return true;
+  } catch (error) {
+    console.error("Error sending notification:", error);
+    return false;
+  }
+}
+
+async function captureFullScreen(): Promise<boolean> {
+  try {
+    await $`grim ${SCREENSHOT_FILE}`;
+    return true;
+  } catch (error) {
+    console.error("Error capturing full screen:", error);
+    return false;
+  }
+}
+
+async function captureActiveMonitor(): Promise<boolean> {
+  try {
+    const monitorsJson = await $`hyprctl monitors -j`.text();
+    const monitors = JSON.parse(monitorsJson) as Monitor[];
+    const activeMonitor = monitors.find((m) => m.focused)?.name;
+
+    if (!activeMonitor) {
+      throw new Error("No active monitor found");
+    }
+
+    await $`grim -o "${activeMonitor}" ${SCREENSHOT_FILE}`;
+    return true;
+  } catch (error) {
+    console.error("Error capturing active monitor:", error);
+    return false;
+  }
+}
+
+async function captureArea(geometry: string): Promise<boolean> {
+  try {
+    await $`grim -g "${geometry}" ${SCREENSHOT_FILE}`;
+    return true;
+  } catch (error) {
+    console.error("Error capturing area:", error);
+    return false;
+  }
+}
+
+async function getGeometry(): Promise<string> {
+  const proc = Bun.spawn([
+    "slurp",
+    "-d",
+    "-b",
+    "#00000044",
+    "-c",
+    "#00000000",
+    "-s",
+    "#00000000",
+    "-w",
+    "2",
+  ]);
+
+  const output = await new Response(proc.stdout).text();
+  const geometry = output.trim();
+
+  if (!geometry) {
+    throw new Error("No area selected");
+  }
+
+  return geometry;
+}
+
+async function processWithSwappy(file: string): Promise<boolean> {
+  return new Promise((resolve) => {
+    Bun.spawn(["swappy", "-f", file, "-o", file], {
+      async onExit(proc, exitCode, error) {
+        if (exitCode === 0) {
+          await Bun.sleep(100);
+
+          await copyToClipboard(file);
+
+          resolve(true);
+        } else {
+          console.error("Swappy failed:", error);
+          resolve(false);
+        }
+      },
+    });
+  });
+}
+
+async function takeScreenshot(mode: string): Promise<boolean> {
+  try {
+    let success = false;
+
+    switch (mode) {
+      case "p":
+        success = await captureFullScreen();
+        break;
+
+      case "m":
+        success = await captureActiveMonitor();
+        break;
+
+      case "s":
+        try {
+          const geometry = await getGeometry();
+          success = await captureArea(geometry);
+        } catch (error) {
+          console.error("Error during area selection:", error);
+          return false;
+        }
+        break;
+        case "sf": // Frozen area selection
+        
+      default:
+        console.log("Usage: screenshot.ts <mode>");
+        console.log("Modes:");
+        console.log(" p  : full screen");
+        console.log(" s  : area selection");
+        console.log(" sf : frozen area selection");
+        console.log(" m  : active monitor");
+        return false;
+    }
+
+    if (success) {
+      return (
+        await sendNotification(
+          SCREENSHOT_FILE,
+          "Screenshot captured And Saved "
+        ),
+        processWithSwappy(SCREENSHOT_FILE),
+        copyToClipboard(SCREENSHOT_FILE)
+      );
+    }
+
+    return false;
+  } catch (error) {
+    if (error instanceof Error) {
+      console.error("Error taking screenshot:", error.message);
+    }
+    return false;
+  }
+}
+
+async function main() {
+  const mode = Bun.argv[2];
+  if (!mode) {
+    console.error("Please specify a screenshot mode");
     process.exit(1);
   }
-};
 
-const mode = process.argv[2] || "-f";
-takeScreenshot(mode);
+  const result =
+    await $`hyprctl -j getoption cursor:no_hardware_cursors`.text();
+  const hwCursor = (JSON.parse(result) as HyprctlResponse).int;
+
+  try {
+    await $`hyprctl keyword cursor:no_hardware_cursors false`;
+    await Bun.sleep(100);
+
+    await takeScreenshot(mode);
+  } finally {
+    await $`hyprctl keyword cursor:no_hardware_cursors ${hwCursor}`;
+  }
+}
+
+main().catch((error) => {
+  if (error instanceof Error) {
+    console.error("Fatal error:", error.message);
+  }
+  process.exit(1);
+});
