@@ -1,7 +1,0 @@
-configuration {
-    modi: "drun";
-    show-icons: true;
-    display-drun: "";
-    drun-display-format: "{icon} {name}";
-    window-format: "{w}: {c}";
-}
