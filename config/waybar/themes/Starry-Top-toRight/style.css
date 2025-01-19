@@ -1,0 +1,157 @@
+* {
+  min-height: 0;
+  min-width: 0;
+  font-family: Lexend, "JetBrainsMono NFP";
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 15px 5px 15px 5px;
+}
+
+window#waybar {
+  transition-property: background-color;
+  transition-duration: 0.5s;
+  background-color: rgba(24, 24, 37, 0.6);
+  border: solid 2px rgba(25, 25, 37, 0.6);
+}
+
+#workspaces {
+  margin: 0px 10px 0px 5px;
+}
+
+#custom-rofi {
+  padding: 0.3rem 0.6rem;
+  margin: 0.3rem 0rem 0.3rem 0.5rem;
+  background-color: rgba(30, 30, 46, 0.6);
+  color: #cdd6f4;
+}
+
+#workspaces button {
+  padding: 0.3rem 0.6rem;
+  margin: 0.3rem 0.25rem;
+  background-color: rgba(30, 30, 46, 0.6);
+  color: #cdd6f4;
+}
+
+#workspaces button:hover {
+  background: rgba(49, 50, 68, 0.6); /* Mocha surface0 */
+  border-radius: 15px 5px 15px 5px;
+}
+
+#workspaces button.visible {
+  border-radius: 15px 5px 15px 5px;
+  background: rgba(30, 30, 46, 0.6); /* Mocha base */
+}
+
+#workspaces button.visible:hover {
+  border-radius: 15px 5px 15px 5px;
+  background: rgba(30, 30, 46, 0.6); /* Mocha base */
+}
+
+#workspaces button.active {
+  border-radius: 15px 5px 15px 5px;
+  background: rgba(41, 41, 60, 0.5); /* Mocha base */
+}
+
+#workspaces button.active:hover {
+  border-radius: 15px 5px 15px 5px;
+  background: rgba(30, 30, 46, 0.6); /* Mocha base */
+}
+
+#workspaces button.urgent {
+  border-radius: 15px 5px 15px 5px;
+  background: rgba(243, 139, 168, 0.6); /* Mocha red */
+}
+
+#clock,
+#pulseaudio,
+#custom-logo,
+#custom-power,
+#custom-spotify,
+#custom-notification,
+#custom-wifi,
+#cpu,
+#tray,
+#memory,
+#window,
+#custom-cava,
+#custom-updates,
+#mpris {
+  padding: 0.3rem 0.6rem;
+  margin: 0.3rem 0.25rem;
+  background-color: rgba(30, 30, 46, 0.6);
+}
+#mpris {
+  border-radius: 5px 15px 5px 15px;
+}
+#mpris.playing {
+  color: #a6e3a1;
+}
+
+#mpris.paused {
+  color: #9399b2;
+}
+
+#custom-sep {
+  padding: 0px;
+  color: #585b70;
+}
+
+window#waybar.empty #window {
+  background-color: transparent;
+}
+
+#cpu {
+  color: #94e2d5;
+}
+
+#memory {
+  color: #cba6f7;
+}
+
+#clock {
+  color: #74c7ec;
+}
+
+#clock.simpleclock {
+  color: #89b4fa;
+}
+
+#window {
+  color: #cdd6f4;
+}
+
+#pulseaudio {
+  color: #b4befe;
+}
+
+#pulseaudio.muted {
+  color: #a6adc8;
+}
+
+#custom-logo {
+  color: #89b4fa;
+}
+
+#custom-power {
+  color: #f38ba8;
+  margin: 0.3rem 0.7rem;
+}
+
+#custom-wifi {
+  color: #b4befe;
+  margin: 0.3rem 0.7rem;
+}
+
+tooltip {
+  background-color: rgba(24, 24, 37, 0.6);
+  border: 2px solid rgba(137, 180, 250, 0.6);
+}
+
+#custom-cava {
+  color: #8fbc8f;
+  border-left: 0px;
+  border-right: 0px;
+  padding-bottom: 6px;
+  font-family: "bargraph";
+  font-size: 22px;
+}
