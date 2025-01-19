@@ -43,7 +43,7 @@ async function showRofiMenu(items: string[]): Promise<string> {
     }
   );
 
-  await rofi.stdin.write(formattedItems.join("\n"));
+  rofi.stdin.write(formattedItems.join("\n"));
   await rofi.stdin.end();
 
   const output = await new Response(rofi.stdout).text();
@@ -58,10 +58,10 @@ async function setWallpaper(selected: string) {
   }
 
   try {
-    await Bun.spawn(["swww", "init"]);
-  } catch {}
+    Bun.spawn(["swww", "init"]);
+  } catch { }
 
-  await Bun.spawn([
+  Bun.spawn([
     "swww",
     "img",
     sourcePath,

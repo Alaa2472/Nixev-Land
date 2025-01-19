@@ -85,22 +85,20 @@ async function captureArea(geometry: string): Promise<boolean> {
 async function captureFrozenArea(geometry: string): Promise<boolean> {
   try {
     // Save current animations state
-    const animationsJson = await $`hyprctl animations list -j`.text();
-    const currentAnimations = JSON.parse(animationsJson);
-    
+
     // Disable animations temporarily
     await $`hyprctl keyword animations:enabled 0`;
-    
+
     // Force a frame to be rendered with animations disabled
     await $`hyprctl dispatch forcerendererreload`;
     await Bun.sleep(50); // Small delay to ensure frame is rendered
-    
+
     // Take the screenshot
     await $`grim -g "${geometry}" ${SCREENSHOT_FILE}`;
-    
+
     // Restore animations
     await $`hyprctl keyword animations:enabled 1`;
-    
+
     return true;
   } catch (error) {
     console.error("Error capturing frozen area:", error);
@@ -138,7 +136,7 @@ async function processWithSwappy(file: string): Promise<boolean> {
   return new Promise((resolve) => {
     Bun.spawn(["swappy", "-f", file, "-o", file], {
       async onExit(proc, exitCode, error) {
-        if (exitCode === 0) {
+        if (proc || exitCode === 0) {
           await Bun.sleep(100);
 
           await copyToClipboard(file);
@@ -175,7 +173,7 @@ async function takeScreenshot(mode: string): Promise<boolean> {
           return false;
         }
         break;
-        case "sf":
+      case "sf":
         try {
           const geometry = await getGeometry();
           success = await captureFrozenArea(geometry);
