@@ -137,7 +137,7 @@ return {
         "gitcommit",
         "git_rebase",
         "gitignore",
-        "gitattributes"
+        "gitattributes",
       },
     },
   },
@@ -216,5 +216,5 @@ return {
     config = function()
       vim.cmd([[do FileType]])
     end,
-  }
+  },
 }
