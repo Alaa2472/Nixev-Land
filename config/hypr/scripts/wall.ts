@@ -6,7 +6,7 @@ import { existsSync } from "fs";
 
 const WALLPAPERS_DIR = "/home/nix/Pictures/Nixuccin";
 const HYPR_CONFIG_DIR = "/home/nix/.config/hypr";
-const TARGET_PATH = join(HYPR_CONFIG_DIR, "wall.jpg");
+const TARGET_PATH = join(HYPR_CONFIG_DIR, "wall.png");
 
 async function ensureDirectories() {
   await mkdir(WALLPAPERS_DIR, { recursive: true });
@@ -43,7 +43,7 @@ async function showRofiMenu(items: string[]): Promise<string> {
     }
   );
 
-  rofi.stdin.write(formattedItems.join("\n"));
+  await rofi.stdin.write(formattedItems.join("\n"));
   await rofi.stdin.end();
 
   const output = await new Response(rofi.stdout).text();
@@ -58,10 +58,10 @@ async function setWallpaper(selected: string) {
   }
 
   try {
-    Bun.spawn(["swww", "init"]);
-  } catch { }
+    await Bun.spawn(["swww", "init"]);
+  } catch {}
 
-  Bun.spawn([
+  await Bun.spawn([
     "swww",
     "img",
     sourcePath,

@@ -3,7 +3,7 @@
     font-size: ${fntSize}px;
 }
 
-@import "$HOME/.config/waybar/theme.css";
+@import "$HOME/.config/waybar/style.css";
 
 window {
     background-color: transparent;
